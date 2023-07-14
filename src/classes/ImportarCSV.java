@@ -44,4 +44,10 @@ public class ImportarCSV {
 
         return listaDeFuncionarios;
     }
+
+    public void imprimirLista() {
+        for (Funcionario fun: listaDeFuncionarios) {
+            System.out.println(fun);
+        }
+    }
 }
