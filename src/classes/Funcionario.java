@@ -1,3 +1,5 @@
+package classes;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -5,10 +7,14 @@ public class Funcionario extends Pessoa {
     private String funcao;
     private BigDecimal salario;
 
-    public Funcionario(String nome, LocalDate dataNascimento, String funcao, BigDecimal salario) {
+    public Funcionario(String nome, LocalDate dataNascimento, BigDecimal salario, String funcao) {
         super(nome, dataNascimento);
-        this.funcao = funcao;
         this.salario = salario;
+        this.funcao = funcao;
+    }
+
+    public String toString() {
+        return getNome() + " " + getDataNascimento() + " " + getSalario() + " " + getFuncao();
     }
 
     public String getFuncao() {
