@@ -69,4 +69,14 @@ public class ImportarData {
             System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.formatacaoSalario() + " " + fun.getFuncao());
         }
     }
+
+    public void totalDosSalarios() {
+        BigDecimal soma = BigDecimal.valueOf(0);
+        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
+            BigDecimal salario = listaDeFuncionarios.get(i).getSalario();
+            soma = soma.add(salario);
+            System.out.println(salario);
+        }
+        System.out.println("A soma do salário dos funcionários é: " + soma);
+    }
 }
