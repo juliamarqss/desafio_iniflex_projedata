@@ -1,10 +1,13 @@
 package classes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Pessoa {
     private String nome;
     private LocalDate dataNascimento;
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     public Pessoa(String nome, LocalDate dataNascimento) {
         this.nome = nome;
@@ -25,5 +28,9 @@ public class Pessoa {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String formatacaoData() {
+        return dtf.format(getDataNascimento());
     }
 }
