@@ -29,7 +29,7 @@ public class ImportarCSV {
                 String nome = valor[0];
                 String dataNascimento = valor[1];
                 LocalDate localDate = LocalDate.parse(dataNascimento, dtf);
-                String conversaoData = dtf.format(localDate);
+//                String conversaoData = dtf.format(localDate);
                 BigDecimal salario = new BigDecimal(valor[2].replace(",", "."));
                 String funcao = valor[3];
 
@@ -47,7 +47,7 @@ public class ImportarCSV {
 
     public void imprimirLista() {
         for (Funcionario fun: listaDeFuncionarios) {
-            System.out.println(fun);
+            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.getSalario() + " " + fun.getFuncao());
         }
     }
 }
