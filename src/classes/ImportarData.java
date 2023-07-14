@@ -1,5 +1,7 @@
 package classes;
 
+import comparator.ComparatorOrdemAlfabetica;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ImportarData {
@@ -57,5 +60,13 @@ public class ImportarData {
             }
         }
 //        imprimirLista();
+    }
+
+    public void imprimirOrdemAlfabetica() {
+        System.out.println("Lista por ordem alfabética:");
+        Collections.sort(listaDeFuncionarios, new ComparatorOrdemAlfabetica());
+        for (Funcionario fun: listaDeFuncionarios) {
+            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.formatacaoSalario() + " " + fun.getFuncao());
+        }
     }
 }
