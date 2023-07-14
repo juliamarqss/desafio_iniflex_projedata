@@ -1,11 +1,14 @@
 package classes;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class Funcionario extends Pessoa {
     private String funcao;
     private BigDecimal salario;
+
+    DecimalFormat df = new DecimalFormat("#,###.00");
 
     public Funcionario(String nome, LocalDate dataNascimento, BigDecimal salario, String funcao) {
         super(nome, dataNascimento);
@@ -31,5 +34,9 @@ public class Funcionario extends Pessoa {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public String formatacaoSalario() {
+        return df.format(getSalario());
     }
 }
