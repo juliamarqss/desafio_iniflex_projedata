@@ -29,7 +29,6 @@ public class ImportarData {
                 String nome = valor[0];
                 String dataNascimento = valor[1];
                 LocalDate localDate = LocalDate.parse(dataNascimento, dtf);
-//                String conversaoData = dtf.format(localDate);
                 BigDecimal salario = new BigDecimal(valor[2].replace(",", "."));
                 String funcao = valor[3];
 
@@ -47,7 +46,16 @@ public class ImportarData {
 
     public void imprimirLista() {
         for (Funcionario fun: listaDeFuncionarios) {
-            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.getSalario() + " " + fun.getFuncao());
+            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.formatacaoSalario() + " " + fun.getFuncao());
         }
+    }
+
+    public void removerFuncionario(String nome) {
+        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
+            if (listaDeFuncionarios.get(i).getNome().equals(nome)){
+                listaDeFuncionarios.remove(i);
+            }
+        }
+//        imprimirLista();
     }
 }
