@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImportarCSV {
+public class ImportarData {
     List<Funcionario> listaDeFuncionarios = new ArrayList<>();
 
     public List<Funcionario> preenchendoListaDeFuncionarios() {
