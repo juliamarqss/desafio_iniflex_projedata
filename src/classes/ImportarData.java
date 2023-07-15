@@ -49,7 +49,7 @@ public class ImportarData {
 
     public void imprimirLista() {
         for (Funcionario fun: listaDeFuncionarios) {
-            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.formatacaoSalario() + " " + fun.getFuncao());
+            System.out.println(fun.getNome() + " | " + fun.formatacaoData() + " | " + fun.formatacaoSalario() + " | " + fun.getFuncao());
         }
     }
 
@@ -59,7 +59,21 @@ public class ImportarData {
                 listaDeFuncionarios.remove(i);
             }
         }
-//        imprimirLista();
+    }
+
+    public void atualizarSalario(double porcentagem) {
+        BigDecimal cem = new BigDecimal(100);
+        BigDecimal porcentagemConvertida = new BigDecimal(porcentagem);
+        BigDecimal porcentagemPorCem = porcentagemConvertida.divide(cem);
+
+        for (Funcionario fun : listaDeFuncionarios) {
+            BigDecimal salario = fun.getSalario();
+            BigDecimal valor = salario.multiply(porcentagemPorCem);
+            fun.setSalario(salario.add(valor));
+        }
+
+        System.out.println("Lista de funcionarios com salário atualizado (Aumento de " + porcentagem + "%):");
+        imprimirLista();
     }
 
     public void imprimirOrdemAlfabetica() {
