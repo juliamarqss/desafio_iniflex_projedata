@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ImportarData {
     List<Funcionario> listaDeFuncionarios = new ArrayList<>();
@@ -48,6 +46,7 @@ public class ImportarData {
     }
 
     public void imprimirLista() {
+//        System.out.println("\nLista de funcionários:");
         for (Funcionario fun: listaDeFuncionarios) {
             System.out.println(fun.getNome() + " | " + fun.formatacaoData() + " | " + fun.formatacaoSalario() + " | " + fun.getFuncao());
         }
@@ -59,6 +58,7 @@ public class ImportarData {
                 listaDeFuncionarios.remove(i);
             }
         }
+        System.out.println("\nFuncionário(a) " + nome + " removido da lista!");
     }
 
     public void atualizarSalario(double porcentagem) {
@@ -72,8 +72,29 @@ public class ImportarData {
             fun.setSalario(salario.add(valor));
         }
 
-        System.out.println("Lista de funcionarios com salário atualizado (Aumento de " + porcentagem + "%):");
+        System.out.println("\nLista de funcionarios com salário atualizado (Aumento de " + porcentagem + "%):");
         imprimirLista();
+    }
+
+    public Map<String, List<Funcionario>> listarPorFuncao(List<Funcionario> listaDeFuncionarios) {
+        Map<String, List<Funcionario>> funcionariosPorFuncao = new HashMap<>();
+        for (Funcionario fun : listaDeFuncionarios) {
+            List<Funcionario> listaFuncao = funcionariosPorFuncao.get(fun.getFuncao());
+            if (listaFuncao == null) {
+                listaFuncao = new ArrayList<>();
+                funcionariosPorFuncao.put(fun.getFuncao(), listaFuncao);
+            }
+            listaFuncao.add(fun);
+        }
+        return funcionariosPorFuncao;
+    }
+
+    public void imprimirPorFuncao() {
+        Map<String, List<Funcionario>> funcionariosPorFuncao = listarPorFuncao(listaDeFuncionarios);
+//        Set<Map.Entry<String, List<Funcionario>>> entry = funcionariosPorFuncao.entrySet();
+        for (String funcao: funcionariosPorFuncao.keySet()) {
+            System.out.println(funcao + ": " + funcionariosPorFuncao.get(funcao));
+        }
     }
 
     public void imprimirOrdemAlfabetica() {
@@ -86,8 +107,8 @@ public class ImportarData {
 
     public void totalDosSalarios() {
         BigDecimal soma = BigDecimal.valueOf(0);
-        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
-            BigDecimal salario = listaDeFuncionarios.get(i).getSalario();
+        for (Funcionario listaDeFuncionario : listaDeFuncionarios) {
+            BigDecimal salario = listaDeFuncionario.getSalario();
             soma = soma.add(salario);
             System.out.println(salario);
         }
