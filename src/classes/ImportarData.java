@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
@@ -92,7 +93,6 @@ public class ImportarData {
 
     public void imprimirPorFuncao() {
         Map<String, List<Funcionario>> funcionariosPorFuncao = listarPorFuncao(listaDeFuncionarios);
-//        Set<Map.Entry<String, List<Funcionario>>> entry = funcionariosPorFuncao.entrySet();
 
         System.out.println("\nLista de funcionários separado por função:");
         for (String funcao: funcionariosPorFuncao.keySet()) {
@@ -158,7 +158,16 @@ public class ImportarData {
         System.out.println("A soma do salário dos funcionários é: " + soma);
     }
 
-    public void salariosMinimos() {
+    public void qtdSalariosMinimos() {
+        System.out.println("\nLista de quantos salários mínimos cada funcionário ganha:");
+        for (Funcionario fun: listaDeFuncionarios) {
+            String nome = fun.getNome();
+            BigDecimal salario = fun.getSalario();
+            BigDecimal minimo = new BigDecimal(1212.00);
+            BigDecimal resultado = salario.divide(minimo, 2, RoundingMode.HALF_UP);
+            String valor = resultado.toString().replace(".", ",");
 
+            System.out.println(nome + " ganha " + valor + " salários mínimos.");
+        }
     }
 }
