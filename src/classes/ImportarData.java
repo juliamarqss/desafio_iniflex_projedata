@@ -47,8 +47,11 @@ public class ImportarData {
         return listaDeFuncionarios;
     }
 
-    public void imprimirLista() {
-//        System.out.println("\nLista de funcionários:");
+    public void imprimirLista(boolean visivel) {
+        if (visivel) {
+            System.out.println("Lista de funcionários:");
+        }
+
         for (Funcionario fun: listaDeFuncionarios) {
             System.out.println(fun.getNome() + " | " + fun.formatacaoData() + " | " + fun.formatacaoSalario() + " | " + fun.getFuncao());
         }
@@ -60,7 +63,7 @@ public class ImportarData {
                 listaDeFuncionarios.remove(i);
             }
         }
-        System.out.println("\nFuncionário(a) " + nome + " removido da lista!");
+        System.out.println("\nFuncionário(a) " + nome + " removido da lista!\n");
     }
 
     public void atualizarSalario(double porcentagem) {
@@ -75,7 +78,7 @@ public class ImportarData {
         }
 
         System.out.println("\nLista de funcionarios com salário atualizado (Aumento de " + porcentagem + "%):");
-        imprimirLista();
+        imprimirLista(false);
     }
 
     public Map<String, List<Funcionario>> listarPorFuncao(List<Funcionario> listaDeFuncionarios) {
@@ -103,7 +106,7 @@ public class ImportarData {
     public void aniversariantes(int n1, int n2) {
         String nome = "";
 
-        System.out.println("Aniversariantes dos meses " + n1 + " e " + n2 + ":");
+        System.out.println("\nAniversariantes dos meses " + n1 + " e " + n2 + ":");
 
         for (int i = 0; i < listaDeFuncionarios.size(); i++) {
             LocalDate dataDeNascimento = listaDeFuncionarios.get(i).getDataNascimento();
@@ -137,14 +140,14 @@ public class ImportarData {
             }
         }
 
-        System.out.println("Funcionário(a) com a maior idade é: " + nome + " com " + idadeMax + " anos.");
+        System.out.println("\nFuncionário(a) com a maior idade é: " + nome + " com " + idadeMax + " anos.");
     }
 
     public void imprimirOrdemAlfabetica() {
-        System.out.println("Lista por ordem alfabética:");
+        System.out.println("\nLista por ordem alfabética:");
         Collections.sort(listaDeFuncionarios, new ComparatorOrdemAlfabetica());
         for (Funcionario fun: listaDeFuncionarios) {
-            System.out.println(fun.getNome() + " " + fun.formatacaoData() + " " + fun.formatacaoSalario() + " " + fun.getFuncao());
+            System.out.println(fun.getNome() + " | " + fun.formatacaoData() + " | " + fun.formatacaoSalario() + " | " + fun.getFuncao());
         }
     }
 
@@ -153,9 +156,9 @@ public class ImportarData {
         for (Funcionario listaDeFuncionario : listaDeFuncionarios) {
             BigDecimal salario = listaDeFuncionario.getSalario();
             soma = soma.add(salario);
-            System.out.println(salario);
+//            System.out.println(salario);
         }
-        System.out.println("A soma do salário dos funcionários é: " + soma);
+        System.out.println("\nA soma do salário dos funcionários é: " + soma);
     }
 
     public void qtdSalariosMinimos() {
