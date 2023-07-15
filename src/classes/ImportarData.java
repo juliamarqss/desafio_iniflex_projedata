@@ -7,15 +7,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ImportarData {
     List<Funcionario> listaDeFuncionarios = new ArrayList<>();
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
     public List<Funcionario> preenchendoListaDeFuncionarios() {
         String caminhoArquivo = "src/funcionarios.csv";
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
         try {
             FileReader leitorArquivo = new FileReader(caminhoArquivo);
@@ -92,9 +93,36 @@ public class ImportarData {
     public void imprimirPorFuncao() {
         Map<String, List<Funcionario>> funcionariosPorFuncao = listarPorFuncao(listaDeFuncionarios);
 //        Set<Map.Entry<String, List<Funcionario>>> entry = funcionariosPorFuncao.entrySet();
+
+        System.out.println("\nLista de funcionários separado por função:");
         for (String funcao: funcionariosPorFuncao.keySet()) {
             System.out.println(funcao + ": " + funcionariosPorFuncao.get(funcao));
         }
+    }
+
+//    public void aniversariantes() {
+//        for (Funcionario fun: listaDeFuncionarios) {
+//            if (fun.getDataNascimento() )
+//        }
+//    }
+
+    public void imprimirMaiorIdade() {
+        int idadeMax = 1;
+        String nome = "";
+        int anoAtual = Year.now().getValue();
+
+        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
+            LocalDate dataDeNascimento = listaDeFuncionarios.get(i).getDataNascimento();
+            int ano = dataDeNascimento.getYear();
+            int resultado = anoAtual - ano;
+
+            if (resultado > idadeMax) {
+                idadeMax = resultado;
+                nome = listaDeFuncionarios.get(i).getNome();
+            }
+        }
+
+        System.out.println("Funcionário(a) com a maior idade é: " + nome + " com " + idadeMax + " anos.");
     }
 
     public void imprimirOrdemAlfabetica() {
@@ -113,5 +141,9 @@ public class ImportarData {
             System.out.println(salario);
         }
         System.out.println("A soma do salário dos funcionários é: " + soma);
+    }
+
+    public void salariosMinimos() {
+
     }
 }
