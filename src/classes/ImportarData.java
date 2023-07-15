@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ImportarData {
     List<Funcionario> listaDeFuncionarios = new ArrayList<>();
@@ -99,7 +100,7 @@ public class ImportarData {
 
         System.out.println("\nLista de funcionários separado por função:");
         for (String funcao: funcionariosPorFuncao.keySet()) {
-            System.out.println(funcao + ": " + funcionariosPorFuncao.get(funcao));
+            System.out.println(funcao + ": " + funcionariosPorFuncao.get(funcao).stream().map(funcionario -> funcionario.getNome()).collect(Collectors.joining(", ")));
         }
     }
 
