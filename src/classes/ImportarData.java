@@ -100,11 +100,26 @@ public class ImportarData {
         }
     }
 
-//    public void aniversariantes() {
-//        for (Funcionario fun: listaDeFuncionarios) {
-//            if (fun.getDataNascimento() )
-//        }
-//    }
+    public void aniversariantes(int n1, int n2) {
+        String nome = "";
+
+        System.out.println("Aniversariantes dos meses " + n1 + " e " + n2 + ":");
+
+        for (int i = 0; i < listaDeFuncionarios.size(); i++) {
+            LocalDate dataDeNascimento = listaDeFuncionarios.get(i).getDataNascimento();
+            int mes = dataDeNascimento.getMonthValue();
+
+            if (mes == n1) {
+                nome = listaDeFuncionarios.get(i).getNome();
+                System.out.println(nome + " - "+ listaDeFuncionarios.get(i).formatacaoData());
+            }
+
+            if (mes == n2) {
+                nome = listaDeFuncionarios.get(i).getNome();
+                System.out.println(nome + " - "+ listaDeFuncionarios.get(i).formatacaoData());
+            }
+        }
+    }
 
     public void imprimirMaiorIdade() {
         int idadeMax = 1;
